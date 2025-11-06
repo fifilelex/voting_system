@@ -2,7 +2,7 @@
 candidates = ['Zackary Cameron', 'Siobhan Bush', 'Lewis Gardner', 'Michaela Jefferson', 'Camilla Leach',
               'Caitlyn Munoz', 'Vera Li', 'Betty Valdez', 'Clark Mccormick', 'Noel Marshall']
 votes = []
-voting = False
+voting_mode = ''
 #CANDIDATE MANAGEMENT
 def create_candidate(): #edits in candidate list (only adding yet)
     global candidates
@@ -37,15 +37,26 @@ def vote_setup(): #initializes voting list
     for i in range(len(candidates)):
         votes.append(0)
 
-def election_initialize(voting):
-    r = input('Do you want to start election? ')
-    if (r.lower() == 'yes'):
-        return True
-    elif (r.lower() == 'no'):
-        return False
+def election_initialize():
+
+    work_mode = input("""
+    ----------ELECTION_APP----------
+    Select mode:
+    MANAGE - manager mode
+    USER - used to vote
+    -------------------------------- """)
+    if work_mode.upper() == 'MANAGE':
+        return work_mode
+    elif work_mode.upper() == 'USER':
+        return work_mode
+
+    if work_mode.upper() in ['MANAGE', 'USER']:
+        return work_mode
     else:
-        print('Provided answer is not a correct answer. Write "yes" or "no" to proceed next time')
-        return voting
+        print('It is not a valid work mode.')
+        return election_initialize()
+
+
 
 
 #VOTING
@@ -54,17 +65,18 @@ def vote(number):
     votes[number] += 1
 
 #prepare elections
-voting = election_initialize(voting)
+voting_mode = election_initialize().upper()
 vote_setup()
-while voting: #manage elections
-    #split manage and electing:
+print(voting_mode)
+while voting_mode in ['MANAGE', 'USER']: #manage elections
+    #split manage and electing: - done
     #you cant manage during elections (so we avoid things like we have id that does not correspond with any candidate)
     #create exceptions for int inputs
-    while True:
+    while voting_mode == 'MANAGE':
         option = int(input('Pick what you want to do: '))
         match option:
             case 0:
-                voting = False
+                voting_mode = 'exit'
                 break
             case 1: #view list of candidates
                 print(candidates)
@@ -80,3 +92,19 @@ while voting: #manage elections
                 vote(index)
             case 5: #returns election result
                 print(votes)
+            case _:
+                print('Invalid value.')
+    while voting_mode == 'USER':
+        option = int(input('Pick what you want to do: '))
+        match option:
+            case 0:
+                voting_mode = 'exit'
+                break
+            case 1:
+                print(candidates)
+            case 2:  # vote for someone (no validation yet)
+
+                index = int(input(f'Type number of the candidate'))
+                vote(index)
+            case _:
+                print('Invalid value.')
