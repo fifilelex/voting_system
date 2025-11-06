@@ -21,8 +21,12 @@ def create_candidate(): #edits in candidate list (only adding yet)
 def edit_candidate(number): #edit candidate's name
     global candidates
     print(f'CANDIDATE: {candidates[number]}. TYPE EDITED DETAILS: ')
-    edited_candidate = input('Type name and surname separated by a space: ')
-    candidates[number] = edited_candidate
+    try:
+        edited_candidate = input('Type name and surname separated by a space: ')
+        candidates[number] = edited_candidate
+    except ValueError:
+        print('You have to type a name and surname!')
+
 
 def create_candidate_id(): #creates ids for every candidate
     global candidates
@@ -38,13 +42,15 @@ def vote_setup(): #initializes voting list
         votes.append(0)
 
 def election_initialize():
-
-    work_mode = input("""
+    try:
+        work_mode = input("""
     ----------ELECTION_APP----------
     Select mode:
     MANAGE - manager mode
     USER - used to vote
     -------------------------------- """)
+    except ValueError:
+        print('You have to type a number!')
     if work_mode.upper() == 'MANAGE':
         return work_mode
     elif work_mode.upper() == 'USER':
@@ -69,8 +75,7 @@ voting_mode = election_initialize().upper()
 vote_setup()
 print(voting_mode)
 while voting_mode in ['MANAGE', 'USER']: #manage elections
-    #split manage and electing: - done
-    #you cant manage during elections (so we avoid things like we have id that does not correspond with any candidate)
+
     #create exceptions for int inputs
     while voting_mode == 'MANAGE':
         option = int(input('Pick what you want to do: '))
@@ -84,18 +89,27 @@ while voting_mode in ['MANAGE', 'USER']: #manage elections
                 create_candidate()
                 votes.append(0)
             case 3:
-                index = int(input('Type number of the candidate'))
+                try:
+                    index = int(input('Type number of the candidate'))
+                except ValueError:
+                    print('You have to type a number!')
                 edit_candidate(index)
             case 4: #vote for someone (no validation yet)
 
-                index = int(input(f'Type number of the candidate'))
+                try:
+                    index = int(input('Type number of the candidate'))
+                except ValueError:
+                    print('You have to type a number!')
                 vote(index)
             case 5: #returns election result
                 print(votes)
             case _:
                 print('Invalid value.')
     while voting_mode == 'USER':
-        option = int(input('Pick what you want to do: '))
+        try:
+            option = int(input('Pick what you want to do: '))
+        except ValueError:
+            print('You have to type a number!')
         match option:
             case 0:
                 voting_mode = 'exit'
@@ -103,8 +117,10 @@ while voting_mode in ['MANAGE', 'USER']: #manage elections
             case 1:
                 print(candidates)
             case 2:  # vote for someone (no validation yet)
-
-                index = int(input(f'Type number of the candidate'))
+                try:
+                    index = int(input(f'Type number of the candidate'))
+                except ValueError:
+                    print('You have to type a number!')
                 vote(index)
             case _:
                 print('Invalid value.')
