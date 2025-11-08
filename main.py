@@ -1,10 +1,12 @@
-#GLOBAL VARIABLES
+# GLOBAL VARIABLES
 candidates = ['Zackary Cameron', 'Siobhan Bush', 'Lewis Gardner', 'Michaela Jefferson', 'Camilla Leach',
               'Caitlyn Munoz', 'Vera Li', 'Betty Valdez', 'Clark Mccormick', 'Noel Marshall']
 votes = []
 voting_mode = ''
-#CANDIDATE MANAGEMENT
-def create_candidate(): #edits in candidate list (only adding yet)
+
+
+# CANDIDATE MANAGEMENT
+def create_candidate():  # edits in candidate list (only adding yet)
     global candidates
 
     should_exit = False
@@ -18,8 +20,10 @@ def create_candidate(): #edits in candidate list (only adding yet)
             candidates.append(c)
             print(f'Candidate {c} added successfully. ')
 
-def edit_candidate(number): #edit candidate's name
+
+def edit_candidate(number):  # edit candidate's name
     global candidates
+
     print(f'CANDIDATE: {candidates[number]}. TYPE EDITED DETAILS: ')
     try:
         edited_candidate = input('Type name and surname separated by a space: ')
@@ -28,18 +32,33 @@ def edit_candidate(number): #edit candidate's name
         print('You have to type a name and surname!')
 
 
-def create_candidate_id(): #creates ids for every candidate
+def delete_candidate():
+    global candidates
+    try:
+        index = int(input(f"Type candidate's number: "))
+        try:
+            candidates.remove(candidates[index])
+        except IndexError:
+            print('Selected candidate is not in list')
+
+    except ValueError:
+        print("You have to type candidate's number! ")
+
+
+def create_candidate_id():  # creates ids for every candidate
     global candidates
     candidates_id = []
     for index in (range(len(candidates))):
         candidates_id.append(index)
     return candidates_id
 
-#ELECTION MANAGEMENT
-def vote_setup(): #initializes voting list
+
+# ELECTION MANAGEMENT
+def vote_setup():  # initializes voting list
     global votes
     for i in range(len(candidates)):
         votes.append(0)
+
 
 def election_initialize():
     try:
@@ -63,29 +82,31 @@ def election_initialize():
         return election_initialize()
 
 
-
-
-#VOTING
+# VOTING
 def vote(number):
     global votes
     votes[number] += 1
 
-#prepare elections
+
+# prepare elections
 voting_mode = election_initialize().upper()
 vote_setup()
 print(voting_mode)
-while voting_mode in ['MANAGE', 'USER']: #manage elections
+while voting_mode in ['MANAGE', 'USER']:  # manage elections
 
-    #create exceptions for int inputs
+    # create exceptions for int inputs
     while voting_mode == 'MANAGE':
-        option = int(input('Pick what you want to do: '))
+        try:
+            option = int(input('Pick what you want to do: '))
+        except ValueError:
+            print('You have to type a number!')
         match option:
             case 0:
                 voting_mode = 'exit'
                 break
-            case 1: #view list of candidates
+            case 1:  # view list of candidates
                 print(candidates)
-            case 2: #add candidate to the list
+            case 2:  # add candidate to the list
                 create_candidate()
                 votes.append(0)
             case 3:
@@ -94,14 +115,16 @@ while voting_mode in ['MANAGE', 'USER']: #manage elections
                 except ValueError:
                     print('You have to type a number!')
                 edit_candidate(index)
-            case 4: #vote for someone (no validation yet)
+            case 4:
+                delete_candidate()
+            case 5:  # vote for someone (no validation yet)
 
                 try:
                     index = int(input('Type number of the candidate'))
                 except ValueError:
                     print('You have to type a number!')
                 vote(index)
-            case 5: #returns election result
+            case 6:  # returns election result
                 print(votes)
             case _:
                 print('Invalid value.')
