@@ -1,149 +1,125 @@
 # GLOBAL VARIABLES
-candidates = ['Zackary Cameron', 'Siobhan Bush', 'Lewis Gardner', 'Michaela Jefferson', 'Camilla Leach',
-              'Caitlyn Munoz', 'Vera Li', 'Betty Valdez', 'Clark Mccormick', 'Noel Marshall']
-votes = []
-voting_mode = ''
+#candidates = ['Zackary Cameron', 'Siobhan Bush', 'Lewis Gardner', 'Michaela Jefferson', 'Camilla Leach',
+#              'Caitlyn Munoz', 'Vera Li', 'Betty Valdez', 'Clark Mccormick', 'Noel Marshall']
+#voting_mode = ''
+
+#CLASSES
+class Candidate:
+    def __init__(self, name):
+        self.name = name
+        self.votes = 0
+
+    def edit(self, name):
+        self.name = name
+    def add_vote(self):
+        self.votes += 1
+    def get_votes(self):
+        return self.votes
+    def __str__(self):
+        return f"{self.name} - Votes: {self.votes}" #used to return each candidate name and his result
 
 
-# CANDIDATE MANAGEMENT
-def create_candidate():  # edits in candidate list (only adding yet)
-    global candidates
+class Voter:
+    def __init__(self, name, constituency):
+        self.name = name
+        self.constituency_nr = constituency
+        self.has_voted = False
+class Election:
+    def __init__(self):
+        self.voters = []
+        self.candidates = []
+    def add_voter(self, voter):
+        self.voters.append(voter)
+    def add_candidate(self, candidate):
+        self.candidates.append(candidate)
+    def edit_candidate(self, current_name, new_name):
+        candidate = self.get_candid_name(current_name)
+        if candidate:
+            candidate.edit(new_name)
+            return True
+        return False
 
-    should_exit = False
-    print(f'If you want to close and save changes, write "close"')
-    while not should_exit:
-        c = input(f"Write down candidate's name and surname. ")
-        if c.lower() == 'close':
-            should_exit = True
-            break
-        if c not in candidates:
-            candidates.append(c)
-            print(f'Candidate {c} added successfully. ')
+    def delete_candidate(self, name):
+        candidate = self.get_candid_name(name)
+        if candidate:
+            self.candidates.remove(candidate)
+            return True
+        else:
+            return False
+    def get_candid_name(self, name):
+        return next((c for c in self.candidates if c.name == name), None)
+    def vote(self, voter_name, candidate_name):
+        voter = next((v for v in self.voters if v.name == voter_name), None)
+        candidate = next((c for c in self.candidates if c.name == candidate_name), None)
+        if voter and candidate and not voter.has_voted:
+            candidate.add_vote()
+            voter.has_voted = True
+        else:
+            print('Error or voter already voted')
+    def results(self):
+        for c in self.candidates:
+            print(c)
+#MENU
+election = Election()
+while True:
+    choice = input("""
+--------------------------
+---------ELECTION---------
 
+Pick what you want to do:
+0. Show candidate list
+1. Manage candidates list
+2. Vote
+3. Check results
 
-def edit_candidate(number):  # edit candidate's name
-    global candidates
+--------------------------
+--------------------------
+""")
+    match choice:
+        case "0":
+            election.results()
+        case "1":
+            sub_choice = input("""
+--------------------------
+---------ELECTION---------
 
-    print(f'CANDIDATE: {candidates[number]}. TYPE EDITED DETAILS: ')
-    try:
-        edited_candidate = input('Type name and surname separated by a space: ')
-        candidates[number] = edited_candidate
-    except ValueError:
-        print('You have to type a name and surname!')
+Pick what you want to do:
+1. Add candidate
+2. Edit candidate
+3. Delete candidate
+4. Show candidate list
+5. Back to main menu
 
-
-def delete_candidate():
-    global candidates
-    try:
-        index = int(input(f"Type candidate's number: "))
-        try:
-            candidates.remove(candidates[index])
-        except IndexError:
-            print('Selected candidate is not in list')
-
-    except ValueError:
-        print("You have to type candidate's number! ")
-
-
-def create_candidate_id():  # creates ids for every candidate
-    global candidates
-    candidates_id = []
-    for index in (range(len(candidates))):
-        candidates_id.append(index)
-    return candidates_id
-
-
-# ELECTION MANAGEMENT
-def vote_setup():  # initializes voting list
-    global votes
-    for i in range(len(candidates)):
-        votes.append(0)
-
-
-def election_initialize():
-    try:
-        work_mode = input("""
-    ----------ELECTION_APP----------
-    Select mode:
-    MANAGE - manager mode
-    USER - used to vote
-    -------------------------------- """)
-    except ValueError:
-        print('You have to type a number!')
-    if work_mode.upper() == 'MANAGE':
-        return work_mode
-    elif work_mode.upper() == 'USER':
-        return work_mode
-
-    if work_mode.upper() in ['MANAGE', 'USER']:
-        return work_mode
-    else:
-        print('It is not a valid work mode.')
-        return election_initialize()
-
-
-# VOTING
-def vote(number):
-    global votes
-    votes[number] += 1
-
-
-# prepare elections
-voting_mode = election_initialize().upper()
-vote_setup()
-print(voting_mode)
-while voting_mode in ['MANAGE', 'USER']:  # manage elections
-
-    # create exceptions for int inputs
-    while voting_mode == 'MANAGE':
-        try:
-            option = int(input('Pick what you want to do: '))
-        except ValueError:
-            print('You have to type a number!')
-        match option:
-            case 0:
-                voting_mode = 'exit'
+--------------------------
+--------------------------
+            """)
+            if sub_choice == "1":
+                candid_name = input('Type name of candidate that you want to add')
+                candid = Candidate(candid_name)
+                election.add_candidate(candid)
+                print(f"Candidate {candid_name} added successfully.")
+            elif sub_choice == "2":
+                current_name = input('Type name of candidate that you want to edit')
+                new_name = input('Type new name for the candidate')
+                if election.edit_candidate(current_name, new_name):
+                    print(f"Candidate {current_name} edited to {new_name}.")
+                else:
+                    print(f"Candidate {current_name} not found.")
+            elif sub_choice == "3":
+                candid_name = input('Type name of candidate that you want to delete')
+                if election.delete_candidate(candid_name):
+                    print(f"Candidate {candid_name} deleted successfully.")
+                else:
+                    print(f"Error while trying to delete candidate {candid_name}")
+            elif sub_choice == "4":
+                election.results()
+            elif sub_choice == "5":
                 break
-            case 1:  # view list of candidates
-                print(candidates)
-            case 2:  # add candidate to the list
-                create_candidate()
-                votes.append(0)
-            case 3:
-                try:
-                    index = int(input('Type number of the candidate'))
-                except ValueError:
-                    print('You have to type a number!')
-                edit_candidate(index)
-            case 4:
-                delete_candidate()
-            case 5:  # vote for someone (no validation yet)
-
-                try:
-                    index = int(input('Type number of the candidate'))
-                except ValueError:
-                    print('You have to type a number!')
-                vote(index)
-            case 6:  # returns election result
-                print(votes)
-            case _:
-                print('Invalid value.')
-    while voting_mode == 'USER':
-        try:
-            option = int(input('Pick what you want to do: '))
-        except ValueError:
-            print('You have to type a number!')
-        match option:
-            case 0:
-                voting_mode = 'exit'
-                break
-            case 1:
-                print(candidates)
-            case 2:  # vote for someone (no validation yet)
-                try:
-                    index = int(input(f'Type number of the candidate'))
-                except ValueError:
-                    print('You have to type a number!')
-                vote(index)
-            case _:
-                print('Invalid value.')
+            else:
+                print("Wrong choice!")
+        case "2":
+            voter_name = input("Type your name")
+            candid_name = input("Type name of candidate that you want to vote for")
+            election.vote(voter_name, candid_name)
+        case "3":
+            election.results()
