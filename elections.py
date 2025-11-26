@@ -1,3 +1,5 @@
+import json
+
 class Election:
     def __init__(self):
         self.voters = []
@@ -31,5 +33,11 @@ class Election:
         else:
             print('Error or voter already voted')
     def results(self):
+        results_data = [c.__dict__ for c in self.candidates] #makes candidates data a dictionary
+        with open("results.json", 'w', encoding='utf-8' ) as f:
+            json.dump(results_data, f, indent=4, ensure_ascii=False)
         for c in self.candidates:
             print(c)
+
+
+
