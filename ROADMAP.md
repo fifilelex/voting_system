@@ -1,7 +1,7 @@
 # Voting System Roadmap
 
 ## Data scrap
-- [ ] Save/load candidates (JSON)
+- [x] Save/load candidates (JSON)
 - [ ] Upgrade to SQLite
 
 ## GUI (Tkinter?)

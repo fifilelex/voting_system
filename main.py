@@ -7,7 +7,7 @@ from test import sample_test_data
 
 
 #MENU
-election = Election()
+election = Election("wybory prezydenckie", 2045)
 sample_test_data(election)
 while True:
 
