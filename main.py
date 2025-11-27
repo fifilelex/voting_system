@@ -1,5 +1,5 @@
 
-
+import menu
 from voter import Voter
 from candidate import Candidate
 from elections import Election
@@ -10,38 +10,14 @@ from test import sample_test_data
 election = Election("wybory prezydenckie", 2045)
 sample_test_data(election)
 while True:
-
-    choice = input("""
---------------------------
----------ELECTION---------
-
-Pick what you want to do:
-0. Show candidate list
-1. Manage candidates list
-2. Vote
-3. Check results
-
---------------------------
---------------------------
-""")
+    call_menu()
+    choice = input()
     match choice:
         case "0":
             election.results()
         case "1":
-            sub_choice = input("""
---------------------------
----------ELECTION---------
-
-Pick what you want to do:
-1. Add candidate
-2. Edit candidate
-3. Delete candidate
-4. Show candidate list
-5. Back to main menu
-
---------------------------
---------------------------
-            """)
+            call_submenu()
+            sub_choice = input()
             if sub_choice == "1":
                 candid_name = input('Type name of candidate that you want to add')
                 candid = Candidate(candid_name)
