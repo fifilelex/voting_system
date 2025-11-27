@@ -1,5 +1,5 @@
 
-import menu
+from menu import *
 from voter import Voter
 from candidate import Candidate
 from elections import Election
