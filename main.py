@@ -10,12 +10,13 @@ from test import sample_test_data
 election = Election("wybory prezydenckie", 2045)
 io = IOManager()
 sample_test_data(election)
+
 while True:
     call_menu()
     choice = input()
     match choice:
         case "0":
-            election.results()
+            election.getAllCandidates()
         case "1":
             call_submenu()
             sub_choice = input()
@@ -37,13 +38,13 @@ while True:
                 else:
                     print(f"Error while trying to delete candidate {name}")
             elif sub_choice == "4":
-                election.results()
+                election.getAllCandidates()
             elif sub_choice == "5":
                 break
             else:
                 print("Wrong choice!")
         case "2":
-            voter_name, candid_name = io.getVotingData
+            voter_name, candid_name = io.getVotingData()
 
             election.vote(voter_name, candid_name)
         case "3":

@@ -9,6 +9,8 @@ class Candidate:
         self.votes += 1
     def get_votes(self):
         return self.votes
+    def to_dict(self):
+        return {"name": self.name, "votes": self.votes}
     def __str__(self):
         return f"{self.name} - Votes: {self.votes}" #used to return each candidate name and his result
 

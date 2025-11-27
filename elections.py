@@ -34,12 +34,33 @@ class Election:
             voter.has_voted = True
         else:
             print('Error or voter already voted')
+    def findWinner(self):
+        if not self.candidates:
+            return []
+        max_votes = max(c.votes for c in self.candidates)
+        return [c for c in self.candidates if c.votes == max_votes]
     def results(self):
-        results_data = [c.__dict__ for c in self.candidates] #makes candidates data a dictionary
+        results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
+
         with open(f"{self.name}_results.json", 'w', encoding='utf-8' ) as f:
-            json.dump(results_data, f, indent=4, ensure_ascii=False)
+            json.dump({
+                "Election": self.name,
+                "Candidates": results_data
+            }, f, indent=4, ensure_ascii=False)
+
         for c in self.candidates:
             print(c)
 
-
+        winner = self.findWinner()
+        if winner:
+            print("\nElection winner(s):")
+            for w in winner:
+                print(f"{w.name} with {w.votes} votes")
+        data_winner = {
+            "Election": self.name,
+            "Winners": [c.to_dict() for c in winner]
+        }
+        with open(f"{self.name}_results.json", 'w', encoding='utf-8') as f:
+            json.dump(data_winner, f, indent=4, ensure_ascii=False)
+        return winner
 
