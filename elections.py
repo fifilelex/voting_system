@@ -1,5 +1,8 @@
 import json
 
+from candidate import Candidate
+
+
 class Election:
     def __init__(self, name, year):
         self.name = name
@@ -26,6 +29,10 @@ class Election:
             return False
     def get_candid_name(self, name):
         return next((c for c in self.candidates if c.name == name), None)
+    def getCandidates(self):
+        for c in self.candidates:
+            print(Candidate.getCandidates(c))
+
     def vote(self, voter_name, candidate_name):
         voter = next((v for v in self.voters if v.name == voter_name), None)
         candidate = next((c for c in self.candidates if c.name == candidate_name), None)

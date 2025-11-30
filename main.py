@@ -16,7 +16,7 @@ while True:
     choice = input()
     match choice:
         case "0":
-            election.getAllCandidates()
+            election.getCandidates()
         case "1":
             call_submenu()
             sub_choice = input()
@@ -38,7 +38,7 @@ while True:
                 else:
                     print(f"Error while trying to delete candidate {name}")
             elif sub_choice == "4":
-                election.getAllCandidates()
+                election.getCandidates()
             elif sub_choice == "5":
                 break
             else:

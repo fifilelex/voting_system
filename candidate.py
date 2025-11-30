@@ -11,6 +11,8 @@ class Candidate:
         return self.votes
     def to_dict(self):
         return {"name": self.name, "votes": self.votes}
+    def getCandidates(self):
+        return self.name
     def __str__(self):
         return f"{self.name} - Votes: {self.votes}" #used to return each candidate name and his result
 
