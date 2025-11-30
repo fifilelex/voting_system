@@ -1,0 +1,21 @@
+{
+    "Election": "wybory prezydenckie",
+    "Winners": [
+        {
+            "name": "Grzegorz Braun",
+            "votes": 0
+        },
+        {
+            "name": "Adrian Zandberg",
+            "votes": 0
+        },
+        {
+            "name": "Amine Papiński",
+            "votes": 0
+        },
+        {
+            "name": "Jarosław Staszkiewicz",
+            "votes": 0
+        }
+    ]
+}
