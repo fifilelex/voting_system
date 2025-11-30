@@ -8,7 +8,7 @@ Pick what you want to do:
 1. Manage candidates list
 2. Vote
 3. Check results
-
+4. Close app
 --------------------------
 --------------------------
 """)

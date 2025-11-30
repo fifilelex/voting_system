@@ -49,3 +49,6 @@ while True:
             election.vote(voter_name, candid_name)
         case "3":
             election.results()
+        case "4":
+            election.close()
+            break

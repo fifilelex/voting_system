@@ -63,4 +63,11 @@ class Election:
         with open(f"{self.name}_results.json", 'w', encoding='utf-8') as f:
             json.dump(data_winner, f, indent=4, ensure_ascii=False)
         return winner
+    def close(self):
+        with open(f"{self.name}_candidates.json", 'w', encoding='utf-8') as ca:
+            cand = [c.to_dict() for c in self.candidates]
+            json.dump(cand, ca, indent=4, ensure_ascii=False)
+        with open(f"{self.name}_voters.json", 'w', encoding='utf-8') as vo:
+            voters = [v.to_dict() for v in self.voters]
+            json.dump(voters, vo, indent=4, ensure_ascii=False)
 
