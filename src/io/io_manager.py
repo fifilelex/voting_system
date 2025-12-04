@@ -13,3 +13,9 @@ class IOManager:
         voter_name = input("Type your name")
         candid_name = input("Type name of candidate that you want to vote for")
         return voter_name, candid_name
+    def getInput(self):
+        return input()
+    def success(self):
+        return print("Success!")
+    def error(self):
+        return print("Error!")

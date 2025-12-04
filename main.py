@@ -1,4 +1,4 @@
-from src.io.io_manager import IOManager
+from src.io.io_manager import *
 from src.io.menu import *
 from src.models.candidate import Candidate
 from src.services.elections import Election
@@ -12,36 +12,38 @@ sample_test_data(election)
 
 while True:
     call_menu()
-    choice = input()
-    match choice:
+
+    match io.getInput():
         case "0":
             election.getCandidates()
         case "1":
             call_submenu()
-            sub_choice = input()
-            if sub_choice == "1":
-                name = io.getCandidateName_add()
-                candid = Candidate(name)
-                election.add_candidate(candid)
-                print(f"Candidate {name} added successfully.")
-            elif sub_choice == "2":
-                current_name, new_name = io.getCandidateName_edit()
-                if election.edit_candidate(current_name, new_name):
-                    print(f"Candidate {current_name} edited to {new_name}.")
-                else:
-                    print(f"Candidate {current_name} not found.")
-            elif sub_choice == "3":
-                name = io.getCandidateName_remove()
-                if election.delete_candidate(name):
-                    print(f"Candidate {name} deleted successfully.")
-                else:
-                    print(f"Error while trying to delete candidate {name}")
-            elif sub_choice == "4":
-                election.getCandidates()
-            elif sub_choice == "5":
-                break
-            else:
-                print("Wrong choice!")
+            match io.getInput():
+
+                case "1":
+                    name = io.getCandidateName_add()
+                    candid = Candidate(name)
+                    election.add_candidate(candid)
+
+                case "2":
+                    current_name, new_name = io.getCandidateName_edit()
+                    if election.edit_candidate(current_name, new_name):
+                        io.success()
+                    else:
+                        io.error()
+
+                case "3":
+                    name = io.getCandidateName_remove()
+                    if election.delete_candidate(name):
+                        io.success()
+                    else:
+                        io.error()
+                case "4":
+                    election.getCandidates()
+                case "5":
+                    break
+                case _:
+                    io.error()
         case "2":
             voter_name, candid_name = io.getVotingData()
 
@@ -51,3 +53,5 @@ while True:
         case "4":
             election.close()
             break
+        case _:
+            io.error()
