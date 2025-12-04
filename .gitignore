@@ -1,0 +1,9 @@
+#IDE
+.idea/
+
+#Virtual Environment
+.venv/
+
+# App data (JSON)
+data/
+

@@ -1,5 +1,5 @@
-from candidate import Candidate
-from voter import Voter
+from src.models.candidate import Candidate
+from src.models.voter import Voter
 
 def sample_test_data(election): #used as sample data, to make testing faster
     election.add_candidate(Candidate("Grzegorz Braun"))

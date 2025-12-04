@@ -1,9 +1,8 @@
-from io_manager import IOManager
-from menu import *
-from voter import Voter
-from candidate import Candidate
-from elections import Election
-from test import sample_test_data
+from src.io.io_manager import IOManager
+from src.io.menu import *
+from src.models.candidate import Candidate
+from src.services.elections import Election
+from tests.test import sample_test_data
 
 
 #MENU

@@ -1,6 +1,5 @@
 import json
-
-from candidate import Candidate
+from src.models.candidate import Candidate
 
 
 class Election:
@@ -48,33 +47,28 @@ class Election:
         return [c for c in self.candidates if c.votes == max_votes]
     def results(self):
         results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
+        winner = self.findWinner()
 
-        with open(f"{self.name}_results.json", 'w', encoding='utf-8' ) as f:
+        if winner:
+            print("\nElection winner(s):")
+            for w in winner:
+                print(f"{w.name} with {w.votes} votes")
+        with open(f"data/{self.name}_results.json", 'w', encoding='utf-8' ) as f:
             json.dump({
                 "Election": self.name,
-                "Candidates": results_data
+                "Candidates": results_data,
+                "Winners": [c.to_dict() for c in winner]
             }, f, indent=4, ensure_ascii=False)
 
         for c in self.candidates:
             print(c)
 
-        winner = self.findWinner()
-        if winner:
-            print("\nElection winner(s):")
-            for w in winner:
-                print(f"{w.name} with {w.votes} votes")
-        data_winner = {
-            "Election": self.name,
-            "Winners": [c.to_dict() for c in winner]
-        }
-        with open(f"{self.name}_results.json", 'w', encoding='utf-8') as f:
-            json.dump(data_winner, f, indent=4, ensure_ascii=False)
         return winner
     def close(self):
-        with open(f"{self.name}_candidates.json", 'w', encoding='utf-8') as ca:
+        with open(f"data/{self.name}_candidates.json", 'w', encoding='utf-8') as ca:
             cand = [c.to_dict() for c in self.candidates]
             json.dump(cand, ca, indent=4, ensure_ascii=False)
-        with open(f"{self.name}_voters.json", 'w', encoding='utf-8') as vo:
+        with open(f"data/{self.name}_voters.json", 'w', encoding='utf-8') as vo:
             voters = [v.to_dict() for v in self.voters]
             json.dump(voters, vo, indent=4, ensure_ascii=False)
 
