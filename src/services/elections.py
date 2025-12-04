@@ -10,8 +10,10 @@ class Election:
         self.year = year
     def add_voter(self, voter):
         self.voters.append(voter)
+        return True
     def add_candidate(self, candidate):
         self.candidates.append(candidate)
+        return True
     def edit_candidate(self, current_name, new_name):
         candidate = self.get_candid_name(current_name)
         if candidate:
@@ -40,6 +42,7 @@ class Election:
             voter.has_voted = True
         else:
             print('Error or voter already voted')
+        return True
     def findWinner(self):
         if not self.candidates:
             return []
