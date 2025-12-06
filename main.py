@@ -11,6 +11,3 @@ sample_test_data(election)
 running = True
 while running:
     running = call_menu_handler(io, election)
-
-
-
