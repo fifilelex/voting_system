@@ -9,6 +9,8 @@ class Candidate:
         self.votes += 1
     def get_votes(self):
         return self.votes
+    def reset_votes(self):
+        self.votes = 0
     def to_dict(self):
         return {"name": self.name, "votes": self.votes}
     def getCandidates(self):
