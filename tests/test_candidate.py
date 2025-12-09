@@ -22,3 +22,12 @@ def test_add_vote():
         assert c.get_votes() == expected_votes
 
     c.reset_votes()
+
+
+def test_rand_add_vote():
+    random.seed(21)
+    c = candidate()
+    num = random.randint(2, 400)
+    for _ in range(num):
+        c.add_vote()
+    assert c.get_votes() == num
