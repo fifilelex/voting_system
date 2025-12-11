@@ -3,7 +3,7 @@ from src.models.candidate import Candidate
 
 def call_submenu_handler(io, election):
 
-    choice = int(io.getInput)
+    choice = int(io.getInput())
     if choice == 1:
         return election.add_candidate(Candidate(io.getCandidateName_add()))
     elif choice == 2:
