@@ -1,6 +1,6 @@
 import json
 from src.models.candidate import Candidate
-
+from src.models.voter import Voter
 
 class Election:
     def __init__(self, name, year):
@@ -28,8 +28,8 @@ class Election:
             return True
         else:
             return False
-    def get_candid_name(self, name):
-        return next((c for c in self.candidates if c.name == name), None)
+    def isCandidate(self, name):
+        return next(c for c in self.candidates if c.name == name)
     def getCandidates(self):
         for c in self.candidates:
             print(Candidate.getCandidates(c))
