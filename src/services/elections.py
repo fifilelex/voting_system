@@ -12,6 +12,8 @@ class Election:
         voter = Voter(name, nr)
         self.voters.append(voter)
         return True
+    def isVoter(self, name, nr):
+        return any (v.name == name and v.constituency_nr== nr for v in self.voters)
     def add_candidate(self, candidate):
         self.candidates.append(candidate)
         return True
