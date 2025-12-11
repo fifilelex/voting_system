@@ -8,7 +8,8 @@ class Election:
         self.voters = []
         self.candidates = []
         self.year = year
-    def add_voter(self, voter):
+    def add_voter(self, name, nr):
+        voter = Voter(name, nr)
         self.voters.append(voter)
         return True
     def add_candidate(self, candidate):
