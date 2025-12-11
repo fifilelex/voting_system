@@ -24,6 +24,8 @@ def main():
                     subrunning = False
                 else:
                     pass
+        elif action == "close":
+            running = False
         else:
             pass
 
