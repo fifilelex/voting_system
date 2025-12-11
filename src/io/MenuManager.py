@@ -19,7 +19,7 @@ def call_submenu_handler(io, election):
     else:
         return False
 def call_menu_handler(io, election):
-        choice = int(io.getInput)
+        choice = int(io.getInput())
         if choice ==  0: #get list of all candidates
                 election.getCandidates()
                 return True
