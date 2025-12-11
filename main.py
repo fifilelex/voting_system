@@ -13,10 +13,12 @@ def main():
     running = True
     subrunning = False
     while running:
+        call_menu()
         action = call_menu_handler(io, election)
         if action == "next":
             subrunning = True
             while subrunning:
+                call_submenu()
                 subaction = call_submenu_handler(io, election)
                 if subaction == "back":
                     subrunning = False
