@@ -26,7 +26,7 @@ class Election:
         return False
 
     def delete_candidate(self, name):
-        candidate = self.get_candid_name(name)
+        candidate = self.isCandidate(name)
         if candidate:
             self.candidates.remove(candidate)
             return True
