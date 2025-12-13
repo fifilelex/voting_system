@@ -42,6 +42,7 @@ def call_menu_handler(io, election):
                 return False
         elif choice == 3: #get election result
                 election.results()
+                return True
         elif choice == 4: #close app
                 election.close()
                 return "close"
