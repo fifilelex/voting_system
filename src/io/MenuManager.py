@@ -23,7 +23,10 @@ def call_submenu_handler(io, election):
     else:
         return False
 def call_menu_handler(io, election):
-        choice = int(io.getInput())
+        try:
+            choice = int(io.getInput())
+        except ValueError:
+            return "Invalid value."
         if choice ==  0: #get list of all candidates
                 election.getCandidates()
                 return True
