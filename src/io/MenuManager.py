@@ -1,16 +1,19 @@
-from src.io.menu import *
 from src.models.candidate import Candidate
 
 def call_submenu_handler(io, election):
 
     choice = int(io.getInput())
+
     if choice == 1:
-        return election.add_candidate(Candidate(io.getCandidateName_add()))
+        name = io.getCandidateName_add()
+        new_candidate = Candidate(name)
+        return election.add_candidate(new_candidate)
     elif choice == 2:
         current_name, new_name = io.getCandidateName_edit()
         return election.edit_candidate(current_name, new_name)
     elif choice == 3: #delete candidate
-        return election.delete_candidate(io.getCandidateName_remove())
+        deletion_name = io.getCandidateName_remove()
+        return election.delete_candidate(deletion_name)
     elif choice ==  4: #get list of all candidates
         election.getCandidates()
         return True
