@@ -1,9 +1,10 @@
 from src.models.candidate import Candidate
 
 def call_submenu_handler(io, election):
-
-    choice = int(io.getInput())
-
+    try:
+        choice = int(io.getInput())
+    except ValueError:
+        return "Invalid value."
     if choice == 1:
         name = io.getCandidateName_add()
         new_candidate = Candidate(name)
