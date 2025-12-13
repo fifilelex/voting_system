@@ -19,7 +19,7 @@ class Election:
         self.candidates.append(new_candidate)
         return True
     def edit_candidate(self, current_name, new_name):
-        candidate = self.get_candid_name(current_name) #checks whether candidate is in candidate list
+        candidate = self.isCandidate(current_name) #checks whether candidate is in candidate list
         if candidate:
             candidate.edit(new_name)
             return True
