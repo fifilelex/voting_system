@@ -1,4 +1,11 @@
 from src.models.candidate import Candidate
+from enum import Enum
+
+class MENURESULTS(Enum):
+    CONTINUE: 1
+    BACK: 2
+    EXIT: 3
+
 
 def call_submenu_handler(io, election):
     try:
