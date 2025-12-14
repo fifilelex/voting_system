@@ -39,23 +39,23 @@ def call_menu_handler(io, election):
             return "Invalid value."
         if choice ==  0: #get list of all candidates
                 election.getCandidates()
-                return True
+                return MENURESULTS.CONTINUE
         elif choice == 1: #show menu for candidates management
-                return "next"
+                return MENURESULTS.CONTINUE
         elif choice == 2: #vote for x
             voter_name, candid_name = io.getVotingData()
             if election.vote(voter_name, candid_name):
                     io.success()
-                    return True
+                    return MENURESULTS.CONTINUE
             else:
                 io.error()
                 return False
         elif choice == 3: #get election result
                 election.results()
-                return True
+                return MENURESULTS.CONTINUE
         elif choice == 4: #close app
                 election.close()
-                return "close"
+                return MENURESULTS.EXIT
         else: #wrong choice
             io.error()
-            return False
+            return MENURESULTS.BACK
