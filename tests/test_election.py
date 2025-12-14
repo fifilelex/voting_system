@@ -1,6 +1,9 @@
 from src.services.elections import Election
+from tests.test import sample_test_data
 def election():
-    return Election("e", 2026)
+    e = Election("e", 2026)
+    sample_test_data(e)
+    return e
 def test_add_voter():
     e = election()
     name = "Andrew Jones"
