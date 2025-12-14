@@ -15,20 +15,23 @@ def call_submenu_handler(io, election):
     if choice == 1:
         name = io.getCandidateName_add()
         new_candidate = Candidate(name)
-        return election.add_candidate(new_candidate)
+        election.add_candidate(new_candidate)
+        return MENURESULTS.CONTINUE
     elif choice == 2:
         current_name, new_name = io.getCandidateName_edit()
-        return election.edit_candidate(current_name, new_name)
+        election.edit_candidate(current_name, new_name)
+        return MENURESULTS.CONTINUE
     elif choice == 3: #delete candidate
         deletion_name = io.getCandidateName_remove()
-        return election.delete_candidate(deletion_name)
+        election.delete_candidate(deletion_name)
+        return MENURESULTS.CONTINUE
     elif choice ==  4: #get list of all candidates
         election.getCandidates()
-        return True
+        return MENURESULTS.CONTINUE
     elif choice == 5: #return to main menu
-        return "back"
+        return MENURESULTS.BACK
     else:
-        return False
+        return MENURESULTS.EXIT
 def call_menu_handler(io, election):
         try:
             choice = int(io.getInput())
