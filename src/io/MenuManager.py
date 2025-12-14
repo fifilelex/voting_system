@@ -31,7 +31,8 @@ def call_submenu_handler(io, election):
     elif choice == 5: #return to main menu
         return MENURESULTS.BACK
     else:
-        return MENURESULTS.EXIT
+        io.error()
+        return MENURESULTS.BACK
 def call_menu_handler(io, election):
         try:
             choice = int(io.getInput())
