@@ -44,9 +44,10 @@ class Election:
         if voter and candidate and not voter.has_voted:
             candidate.add_vote()
             voter.has_voted = True
+            return True
         else:
-            print('Error or voter already voted')
-        return True
+            return False
+
     def findWinner(self):
         if not self.candidates:
             return []
