@@ -16,16 +16,26 @@ def main():
     while running:
         call_menu()
         action = call_menu_handler(io, election)
-        if action == "next":
+        if action == MENURESULTS.CONTINUE:
+            pass
+        elif action == MENURESULTS.BACK:
+            pass
+        elif action == MENURESULTS.NEXT:
             subrunning = True
             while subrunning:
                 call_submenu()
                 subaction = call_submenu_handler(io, election)
-                if subaction == "back":
-                    subrunning = False
-                else:
+                if subaction == MENURESULTS.CONTINUE: #everything works, menu reappears
                     pass
-        elif action == "close":
+                elif subaction == MENURESULTS.BACK:
+                    subrunning = False
+                elif subaction == MENURESULTS.NEXT: #cant go into next menu, cuz submenu is the lowest one
+                    pass
+                elif subaction == MENURESULTS.EXIT: #wont ever happen
+                    pass
+                else: #wrong choice, submenu reappears
+                    pass
+        elif action == MENURESULTS.EXIT:
             running = False
         else:
             pass
