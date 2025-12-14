@@ -15,8 +15,7 @@ def call_submenu_handler(io, election):
         return "Invalid value."
     if choice == 1:
         name = io.getCandidateName_add()
-        new_candidate = Candidate(name)
-        election.add_candidate(new_candidate)
+        election.add_candidate(name)
         return MENURESULTS.CONTINUE
     elif choice == 2:
         current_name, new_name = io.getCandidateName_edit()
