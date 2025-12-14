@@ -47,6 +47,27 @@ def test_add_n_voters():
         nr = new_voters[i][1]
         e.add_voter(name, nr)
         assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
-
-
+def test_edit_candidate():
+    e = election()
+    current_name = "Adrian Zandberg"
+    edit_name = "Potężny Duńczyk"
+    try:
+        e.edit_candidate(current_name, edit_name)
+    except StopIteration:
+        return f"Candidate {current_name} failed to edit (Candidate not found)."
+    assert e.isCandidate(edit_name), f"Candidate {current_name} failed to edit"
+    current_name = "Goroncywir21"
+    edit_name = "Gżegżółka"
+    try:
+        e.edit_candidate(current_name, edit_name)
+    except StopIteration:
+        return f"Candidate {current_name} failed to edit (Candidate not found)."
+    assert e.isCandidate(edit_name) == None, f"Candidate {current_name} edited when it was expected to fail."
+    current_name = "Jarosław Staszkiewicz"
+    edit_name = "Gżegżółką"
+    try:
+        e.edit_candidate(current_name, edit_name)
+    except StopIteration:
+        return f"Candidate {current_name} failed to edit (Candidate not found)."
+    assert e.isCandidate(edit_name)
 
