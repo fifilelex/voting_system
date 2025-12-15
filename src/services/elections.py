@@ -8,12 +8,17 @@ class Election:
         self.voters = []
         self.candidates = []
         self.year = year
+
+    #EDITING VOTER LIST
     def add_voter(self, name, nr):
         voter = Voter(name, nr)
         self.voters.append(voter)
         return True
+
     def isVoter(self, name, nr):
         return any (v.name == name and v.constituency_nr== nr for v in self.voters)
+
+    # EDITING CANDIDATE LIST
     def add_candidate(self, name):
         new_candidate = Candidate(name)
         self.candidates.append(new_candidate)
@@ -32,6 +37,8 @@ class Election:
             return True
         else:
             return False
+
+
     def isCandidate(self, name):
         for c in self.candidates:
             if name == c.name:
@@ -54,6 +61,8 @@ class Election:
         else:
             return False
 
+
+    #ELECTION RELATED
     def findWinner(self):
         if not self.candidates:
             return []
