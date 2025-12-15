@@ -26,7 +26,7 @@ def call_submenu_handler(io, election):
         election.delete_candidate(deletion_name)
         return MENURESULTS.CONTINUE
     elif choice ==  4: #get list of all candidates
-        election.getCandidates()
+        election.get_all_candidates()
         return MENURESULTS.CONTINUE
     elif choice == 5: #return to main menu
         return MENURESULTS.BACK
@@ -39,7 +39,7 @@ def call_menu_handler(io, election):
         except ValueError:
             return "Invalid value."
         if choice ==  0: #get list of all candidates
-                election.getCandidates()
+                election.get_all_candidates()
                 return MENURESULTS.CONTINUE
         elif choice == 1: #show menu for candidates management
                 return MENURESULTS.NEXT

@@ -34,7 +34,7 @@ class Election:
             return False
     def isCandidate(self, name):
         return next((c for c in self.candidates if c.name == name), None)
-    def getCandidates(self):
+    def get_all_candidates(self):
         for c in self.candidates:
             print(Candidate.getCandidates(c))
 
