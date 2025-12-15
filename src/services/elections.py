@@ -19,14 +19,14 @@ class Election:
         self.candidates.append(new_candidate)
         return True
     def edit_candidate(self, current_name, new_name):
-        candidate = self.isCandidate(current_name) #checks whether candidate is in candidate list
+        candidate = self.get_candidate(current_name) #checks whether candidate is in candidate list
         if candidate:
             candidate.edit(new_name)
             return True
         return False
 
     def delete_candidate(self, name):
-        candidate = self.isCandidate(name)
+        candidate = self.get_candidate(name)
         if candidate:
             self.candidates.remove(candidate)
             return True
