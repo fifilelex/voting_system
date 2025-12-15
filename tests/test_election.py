@@ -8,14 +8,15 @@ def test_add_voter():
     e = election()
     name = "Andrew Jones"
     nr = 1
-    assert  e.isVoter(name, nr) == False, f"Voter {name} with nr {nr} found! Error!"
-    e.add_voter(name, nr)
+    assert e.isVoter(name, nr) == False, f"Voter {name} with nr {nr} found! Error!"
+
+    assert e.add_voter(name, nr) is True
     assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
     name, nr = "Maciek Orluk", 2
-    e.add_voter(name, nr)
+    assert e.add_voter(name, nr) is True
     assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
     name, nr = "Orzeł Ówtąrzszny", 2
-    e.add_voter(name, nr)
+    assert e.add_voter(name, nr) is True
     assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
 def test_add_n_voters():
     e = election()
