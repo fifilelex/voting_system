@@ -93,7 +93,19 @@ def test_delete_just_added_candidate(election_with_data):
     e.delete_candidate("Maciej Orluk")
     assert e.isCandidate("Maciej Orluk") is False
 
+def test_get_existing_candidate(election_with_data):
+    e = election_with_data
 
+    assert e.get_candidate("Grzegorz Braun") is not None
 
+def test_get_nonexisting_candidate(election_with_data):
+    e = election_with_data
+
+    assert e.get_candidate("Maciek Maciek Maciek") is None
+
+def test_get_blank_candidate(election_with_data):
+    e = election_with_data
+
+    assert e.get_candidate("") is None
 
 
