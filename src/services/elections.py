@@ -19,18 +19,22 @@ class Election:
         return any (v.name == name and v.constituency_nr== nr for v in self.voters)
 
     # EDITING CANDIDATE LIST
-    def add_candidate(self, name):
+
+    def add_candidate(self, name: str):
         new_candidate = Candidate(name)
         self.candidates.append(new_candidate)
         return True
-    def edit_candidate(self, current_name, new_name):
+
+
+    def edit_candidate(self, current_name: str, new_name:str) -> bool:
         candidate = self.get_candidate(current_name) #checks whether candidate is in candidate list
         if candidate:
             candidate.edit(new_name)
             return True
         return False
 
-    def delete_candidate(self, name):
+
+    def delete_candidate(self, name: str):
         candidate = self.get_candidate(name)
         if candidate:
             self.candidates.remove(candidate)
@@ -39,13 +43,15 @@ class Election:
             return False
 
 
-    def isCandidate(self, name):
+    def isCandidate(self, name: str):
         for c in self.candidates:
             if name == c.name:
                 return True
         else:
             return False
-    def get_candidate(self, name):
+
+
+    def get_candidate(self, name: str):
         return next((c for c in self.candidates if c.name == name), None)
     def get_all_candidates(self):
         for c in self.candidates:
