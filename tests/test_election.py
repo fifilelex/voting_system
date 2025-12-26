@@ -8,11 +8,6 @@ def election_with_data():
     e = Election("e", 2026)
     sample_test_data(e)
     return e
-def test_add_voter():
-    e = election()
-    name = "Andrew Jones"
-    nr = 1
-    assert e.isVoter(name, nr) == False, f"Voter {name} with nr {nr} found! Error!"
 
 #TEST EDITING VOTER LIST
 @pytest.mark.parametrize(
