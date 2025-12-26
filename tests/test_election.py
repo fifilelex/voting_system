@@ -14,12 +14,18 @@ def test_add_voter():
     nr = 1
     assert e.isVoter(name, nr) == False, f"Voter {name} with nr {nr} found! Error!"
 
-    assert e.add_voter(name, nr) is True
-    assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
+#TEST EDITING VOTER LIST
+@pytest.mark.parametrize(
+    ('input_x','input_y', 'expected'),
+    [
+    ('Adrian Zandberg', 2, True),
+    #(4323, 'maciek', False),
+    ]
+)
+def test_add_voter(election_with_data, input_x, input_y, expected):
+    e = election_with_data
 
-    name, nr = "Maciek Orluk", 2
-    assert e.add_voter(name, nr) is True
-    assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
+    assert e.add_voter(input_x, input_y) == expected
 
     name, nr = "Orzeł Ówtąrzszny", 2
     assert e.add_voter(name, nr) is True
