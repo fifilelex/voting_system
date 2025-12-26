@@ -57,9 +57,8 @@ class Election:
         for c in self.candidates:
             print(Candidate.getCandidates(c))
 
-    def vote(self, voter_name, candidate_name):
-        voter = next((v for v in self.voters if v.name == voter_name), None)
-        candidate = next((c for c in self.candidates if c.name == candidate_name), None)
+
+    def vote(self, voter, candidate):
         if voter and candidate and not voter.has_voted:
             candidate.add_vote()
             voter.has_voted = True
