@@ -62,8 +62,9 @@ def test_add_multiple_candidates(election_with_data):
         assert e.add_candidate(new_candidates[i]) is True
         assert e.isCandidate(new_candidates[i]) is True, f"Candidate {new_candidates[i]} is not on the list."
 
-def test_edit_candidate():
-    e = election()
+
+def test_edit_candidate(election_with_data):
+    e = election_with_data
 
     current_name = "Adrian Zandberg"
     edit_name = "Potężny Duńczyk"
