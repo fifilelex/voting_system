@@ -45,7 +45,9 @@ def call_menu_handler(io, election):
                 return MENURESULTS.NEXT
         elif choice == 2: #vote for x
             voter_name, candid_name = io.getVotingData()
-            if election.vote(voter_name, candid_name):
+            c = election.get_candidate(candid_name)
+            v = election.get_voter(voter_name)
+            if election.vote(v, c):
                     io.success()
                     return MENURESULTS.CONTINUE
             else:
