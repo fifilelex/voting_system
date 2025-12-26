@@ -108,4 +108,15 @@ def test_get_blank_candidate(election_with_data):
 
     assert e.get_candidate("") is None
 
+def test_vote(election_with_data):
+    e = election_with_data
+    c = e.get_candidate(name = "Amine Papiński")
+    v = e.get_voter(name = "Adenoid Hynkiel", nr=1)
+    assert e.vote(v, c) is True
+
+def test_vote_nonexistent_candid(election_with_data):
+    e = election_with_data
+    c = e.get_candidate(name = "w")
+    v = e.get_voter(name = "Adenoid Hynkiel", nr=1)
+    assert e.vote(v, c) is False
 
