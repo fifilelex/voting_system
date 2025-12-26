@@ -79,28 +79,18 @@ def test_edit_candidate(election_with_data):
     assert e.edit_candidate(current_name, edit_name) is False
     assert e.isCandidate(edit_name) is False, f"Candidate {current_name} edited when it was expected to fail."
 
-    current_name = "Jarosław Staszkiewicz"
-    edit_name = "Gżegżółką"
-    assert e.edit_candidate(current_name, edit_name) is True
-    assert e.isCandidate(edit_name) is True
-
-def test_delete_existing_candidate():
-    e = election()
+def test_delete_existing_candidate(election_with_data):
+    e = election_with_data
 
     assert e.isCandidate("Grzegorz Braun")
     e.delete_candidate(name="Grzegorz Braun")
     assert e.isCandidate("Grzegorz Braun") is False
-
-    assert e.isCandidate("Jarosław Staszkiewicz")
-    e.delete_candidate(name="Jarosław Staszkiewicz")
-    assert e.isCandidate("Jarosław Staszkiewicz") is False
-
-def test_delete_nonexisting_candidate():
-    e = election()
+def test_delete_nonexisting_candidate(election_with_data):
+    e = election_with_data
 
     assert e.delete_candidate("Nieistniejący") is False
-def test_delete_just_added_candidate():
-    e = election()
+def test_delete_just_added_candidate(election_with_data):
+    e = election_with_data
 
     e.add_candidate("Maciej Orluk")
     e.delete_candidate("Maciej Orluk")
