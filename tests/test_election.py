@@ -1,6 +1,10 @@
+import pytest
+
 from src.services.elections import Election
 from tests.test import sample_test_data
-def election():
+
+@pytest.fixture
+def election_with_data():
     e = Election("e", 2026)
     sample_test_data(e)
     return e
