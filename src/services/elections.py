@@ -10,12 +10,17 @@ class Election:
         self.year = year
 
     #EDITING VOTER LIST
-    def add_voter(self, name, nr):
-        voter = Voter(name, nr)
-        self.voters.append(voter)
-        return True
 
-    def isVoter(self, name, nr):
+    def add_voter(self, name: str, nr: int) -> bool:
+        if not self.isVoter(name, nr):
+            voter = Voter(name, nr)
+            self.voters.append(voter)
+            return True
+        else:
+            return False
+    def get_voter(self, name: str, nr: int):
+        return next((v for v in self.voters if v.name == name), False)
+    def isVoter(self, name: str, nr: int):
         return any (v.name == name and v.constituency_nr== nr for v in self.voters)
 
     # EDITING CANDIDATE LIST
