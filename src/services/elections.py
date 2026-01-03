@@ -75,7 +75,7 @@ class Election:
             raise ValueError("Candidates list is empty!")
         max_votes = max(c.votes for c in self.candidates)
         return [c for c in self.candidates if c.votes == max_votes]
-    def results(self):
+    def results(self): #should be moved to io
         results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
         winner = self.find_winner()
 
@@ -94,7 +94,7 @@ class Election:
             print(c)
 
         return winner
-    def close(self):
+    def close(self): #should be moved to io
         with open(f"data/{self.name}_candidates.json", 'w', encoding='utf-8') as ca:
             cand = [c.to_dict() for c in self.candidates]
             json.dump(cand, ca, indent=4, ensure_ascii=False)
