@@ -31,12 +31,13 @@ class Election:
         self.candidates.append(Candidate(name))
 
 
-    def edit_candidate(self, current_name: str, new_name:str) -> bool:
+    def edit_candidate(self, current_name: str, new_name:str):
+        if current_name is None or new_name is None:
+            raise ValueError("You need to provide both current name and new name of candidate")
         candidate = self.get_candidate(current_name) #checks whether candidate is in candidate list
-        if candidate:
-            candidate.edit(new_name)
-            return True
-        return False
+        if candidate is None:
+            raise ValueError(f"Candidate {current_name} does not exist!")
+        candidate.edit(new_name)
 
 
     def delete_candidate(self, name: str):
