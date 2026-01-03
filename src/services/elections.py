@@ -11,13 +11,12 @@ class Election:
 
     #EDITING VOTER LIST
 
-    def add_voter(self, name: str, nr: int) -> bool:
-        if not self.isVoter(name, nr):
-            voter = Voter(name, nr)
-            self.voters.append(voter)
-            return True
-        else:
-            return False
+    def add_voter(self, name: str, nr: int):
+        if self.isVoter(name, nr):
+            raise ValueError(f"Voter {name} already exists!")
+        self.voters.append(Voter(name, nr))
+
+
     def get_voter(self, name: str, nr: int):
         return next((v for v in self.voters if v.name == name), False)
     def isVoter(self, name: str, nr: int):
