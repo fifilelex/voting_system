@@ -19,12 +19,11 @@ def test_add_voter(election_with_data):
 
     assert e.add_voter(input_x, input_y) == expected
 
-
-def test_add_n_voters(election_with_data):
+def test_add_candidate_duplicate(election_with_data):
     e = election_with_data
-    new_voters = [
-    ["Anna Kowalska", 1],
-    ["Piotr Nowak", 2]]
+    e.add_candidate("Maciek Orluk")
+    with pytest.raises(ValueError, match="already exists"):
+        e.add_candidate("Maciek Orluk")
 
     for i in range(len(new_voters)):
         name = new_voters[i][0]
