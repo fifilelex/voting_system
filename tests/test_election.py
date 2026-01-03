@@ -52,10 +52,14 @@ def test_edit_candidate(election_with_data):
     e.edit_candidate(current_name, edit_name)
     assert e.is_candidate(edit_name)
 
+def test_edit_candidate_nonexisting(election_with_data):
+    e = election_with_data
     current_name = "Goroncywir21"
     edit_name = "Gżegżółka"
-    assert e.edit_candidate(current_name, edit_name) is False
-    assert e.isCandidate(edit_name) is False, f"Candidate {current_name} edited when it was expected to fail."
+    with pytest.raises(ValueError, match="does not exist"):
+        e.edit_candidate(current_name, edit_name)
+    assert e.is_candidate(edit_name) is False
+
 
 def test_delete_existing_candidate(election_with_data):
     e = election_with_data
