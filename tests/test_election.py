@@ -9,16 +9,13 @@ def election_with_data():
     sample_test_data(e)
     return e
 
-#TEST EDITING VOTER LIST
-@pytest.mark.parametrize(
-    ('input_x','input_y', 'expected'),
-    [
-    ('Adrian Zandberg', 2, True),
-    #(4323, 'maciek', False),
-    ]
-)
-def test_add_voter(election_with_data, input_x, input_y, expected):
+
+def test_add_voter(election_with_data):
     e = election_with_data
+    name = 'Adrian Zandberg'
+    nr = 2
+    e.add_voter(name, nr)
+    assert e.isVoter(name, nr)
 
     assert e.add_voter(input_x, input_y) == expected
 
