@@ -71,6 +71,8 @@ def test_delete_existing_candidate(election_with_data):
 
 def test_delete_nonexisting_candidate(election_with_data):
     e = election_with_data
+    with pytest.raises(ValueError, match="does not exist"):
+        e.delete_candidate("Nieistniejący")
 
     assert e.delete_candidate("Nieistniejący") is False
 def test_delete_just_added_candidate(election_with_data):
@@ -106,5 +108,6 @@ def test_vote_nonexistent_candid(election_with_data):
     e = election_with_data
     c = e.get_candidate(name = "w")
     v = e.get_voter(name = "Adenoid Hynkiel", nr=1)
-    assert e.vote(v, c) is False
+    with pytest.raises(ValueError, match="not found"):
+        e.vote(c, v)
 
