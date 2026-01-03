@@ -102,7 +102,11 @@ def test_vote(election_with_data):
     e = election_with_data
     c = e.get_candidate(name = "Amine Papiński")
     v = e.get_voter(name = "Adenoid Hynkiel", nr=1)
-    assert e.vote(v, c) is True
+    assert c.votes == 0
+    e.vote(v, c)
+    assert c.votes == 1
+    assert v.has_voted
+
 
 def test_vote_nonexistent_candid(election_with_data):
     e = election_with_data
