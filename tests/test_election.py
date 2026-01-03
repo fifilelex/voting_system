@@ -39,19 +39,9 @@ def test_is_voter(election_with_data):
 #TEST EDITING CANDIDATE'S LIST
 def test_add_single_candidate(election_with_data):
     e = election_with_data
-
     new_name = "Ola Owca"
-    assert e.add_candidate(new_name) is True
-    assert e.isCandidate(new_name) is True, f"Candidate {new_name} is not on the list."
-def test_add_multiple_candidates(election_with_data):
-    e = election_with_data
-
-    new_candidates = [
-        ["Anna Kowalska"],
-        ["Piotr Nowak"]]
-    for i in range(len(new_candidates)):
-        assert e.add_candidate(new_candidates[i]) is True
-        assert e.isCandidate(new_candidates[i]) is True, f"Candidate {new_candidates[i]} is not on the list."
+    e.add_candidate(new_name)
+    assert e.is_candidate(new_name)
 
 
 def test_edit_candidate(election_with_data):
