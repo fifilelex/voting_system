@@ -64,9 +64,11 @@ def test_edit_candidate_nonexisting(election_with_data):
 def test_delete_existing_candidate(election_with_data):
     e = election_with_data
 
-    assert e.isCandidate("Grzegorz Braun")
+    assert e.is_candidate("Grzegorz Braun")
     e.delete_candidate(name="Grzegorz Braun")
-    assert e.isCandidate("Grzegorz Braun") is False
+    assert e.is_candidate("Grzegorz Braun") is False
+
+
 def test_delete_nonexisting_candidate(election_with_data):
     e = election_with_data
 
@@ -76,7 +78,8 @@ def test_delete_just_added_candidate(election_with_data):
 
     e.add_candidate("Maciej Orluk")
     e.delete_candidate("Maciej Orluk")
-    assert e.isCandidate("Maciej Orluk") is False
+    assert e.is_candidate("Maciej Orluk") is False
+
 
 def test_get_existing_candidate(election_with_data):
     e = election_with_data
