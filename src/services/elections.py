@@ -81,7 +81,7 @@ class Election:
         return [c for c in self.candidates if c.votes == max_votes]
     def results(self):
         results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
-        winner = self.findWinner()
+        winner = self.find_winner()
 
         if winner:
             print("\nElection winner(s):")
