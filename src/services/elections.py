@@ -42,11 +42,9 @@ class Election:
 
     def delete_candidate(self, name: str):
         candidate = self.get_candidate(name)
-        if candidate:
-            self.candidates.remove(candidate)
-            return True
-        else:
-            return False
+        if candidate is None:
+            raise ValueError(f"Candidate {name} does not exist")
+        self.candidates.remove(candidate)
 
 
     def isCandidate(self, name: str):
