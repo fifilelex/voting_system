@@ -63,12 +63,15 @@ class Election:
 
 
     def vote(self, voter, candidate):
-        if voter and candidate and not voter.has_voted:
-            candidate.add_vote()
-            voter.has_voted = True
-            return True
-        else:
-            return False
+        if voter is None:
+            raise ValueError("Voter not found")
+        if candidate is None:
+            raise ValueError("Candidate not found")
+        if voter.has_voted:
+            raise ValueError(f"{voter.name} has already voted")
+
+        candidate.add_vote()
+        voter.has_voted = True
 
 
     #ELECTION RELATED
