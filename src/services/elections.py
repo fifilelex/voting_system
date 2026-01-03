@@ -46,12 +46,8 @@ class Election:
         self.candidates.remove(candidate)
 
 
-    def isCandidate(self, name: str):
-        for c in self.candidates:
-            if name == c.name:
-                return True
-        else:
-            return False
+    def is_candidate(self, name: str) -> bool:
+        return any(c.name == name for c in self.candidates)
 
 
     def get_candidate(self, name: str):
