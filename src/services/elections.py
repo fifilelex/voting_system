@@ -26,9 +26,9 @@ class Election:
     # EDITING CANDIDATE LIST
 
     def add_candidate(self, name: str):
-        new_candidate = Candidate(name)
-        self.candidates.append(new_candidate)
-        return True
+        if self.isCandidate(name):
+            raise ValueError(f"Candidate {name} already exists!")
+        self.candidates.append(Candidate(name))
 
 
     def edit_candidate(self, current_name: str, new_name:str) -> bool:
