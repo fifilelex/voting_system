@@ -47,12 +47,12 @@ def call_menu_handler(io, election):
             voter_name, candid_name = io.getVotingData()
             c = election.get_candidate(candid_name)
             v = election.get_voter(voter_name)
-            if election.vote(v, c):
-                    io.success()
-                    return MENURESULTS.CONTINUE
+            try:
+                election.vote(v, c)
+            except ValueError as e:
+                io.error(str(e))
             else:
-                io.error()
-                return False
+                io.success("Vote casted successfully!")
         elif choice == 3: #get election result
                 election.results()
                 return MENURESULTS.CONTINUE
