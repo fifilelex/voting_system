@@ -49,8 +49,8 @@ def test_edit_candidate(election_with_data):
 
     current_name = "Adrian Zandberg"
     edit_name = "Potężny Duńczyk"
-    assert e.edit_candidate(current_name, edit_name), f"Candidate {current_name} failed to edit (Candidate not found)."
-    assert e.isCandidate(edit_name), f"Candidate {current_name} failed to edit"
+    e.edit_candidate(current_name, edit_name)
+    assert e.is_candidate(edit_name)
 
     current_name = "Goroncywir21"
     edit_name = "Gżegżółka"
