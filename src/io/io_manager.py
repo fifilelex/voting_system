@@ -15,7 +15,7 @@ class IOManager:
         return voter_name, candid_name
     def getInput(self):
         return input()
-    def success(self):
-        return print("Success!")
-    def error(self):
-        return print("Error!")
+    def success(self, msg):
+        return print(f"{msg}")
+    def error(self, msg):
+        return print(msg)
