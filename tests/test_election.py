@@ -17,7 +17,6 @@ def test_add_voter(election_with_data):
     e.add_voter(name, nr)
     assert e.isVoter(name, nr)
 
-    assert e.add_voter(input_x, input_y) == expected
 
 def test_add_candidate_duplicate(election_with_data):
     e = election_with_data
@@ -25,11 +24,6 @@ def test_add_candidate_duplicate(election_with_data):
     with pytest.raises(ValueError, match="already exists"):
         e.add_candidate("Maciek Orluk")
 
-    for i in range(len(new_voters)):
-        name = new_voters[i][0]
-        nr = new_voters[i][1]
-        assert e.add_voter(name, nr)
-        assert e.isVoter(name, nr), f"Voter {name} with nr {nr} not found"
 
 def test_is_voter(election_with_data):
     e = election_with_data
@@ -74,7 +68,7 @@ def test_delete_nonexisting_candidate(election_with_data):
     with pytest.raises(ValueError, match="does not exist"):
         e.delete_candidate("Nieistniejący")
 
-    assert e.delete_candidate("Nieistniejący") is False
+
 def test_delete_just_added_candidate(election_with_data):
     e = election_with_data
 
@@ -88,15 +82,18 @@ def test_get_existing_candidate(election_with_data):
 
     assert e.get_candidate("Grzegorz Braun") is not None
 
+
 def test_get_nonexisting_candidate(election_with_data):
     e = election_with_data
 
     assert e.get_candidate("Maciek Maciek Maciek") is None
 
+
 def test_get_blank_candidate(election_with_data):
     e = election_with_data
 
     assert e.get_candidate("") is None
+
 
 def test_vote(election_with_data):
     e = election_with_data
