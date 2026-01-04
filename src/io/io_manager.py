@@ -42,13 +42,11 @@ class IOManager:
             print(c)
 
 
-    def close(self, election): #should be moved to io
-        with open(f"data/{election.name}_candidates.json", 'w', encoding='utf-8') as ca:
-            cand = [c.to_dict() for c in election.candidates]
-            json.dump(cand, ca, indent=4, ensure_ascii=False)
-        with open(f"data/{election.name}_voters.json", 'w', encoding='utf-8') as vo:
-            voters = [v.to_dict() for v in election.voters]
-            json.dump(voters, vo, indent=4, ensure_ascii=False)
+    def save_data(self, election):
+        cand = [c.to_dict() for c in election.candidates]
+        voters = [v.to_dict() for v in election.voters]
+        return cand, voters
+
 
 
     def success(self, msg):
