@@ -57,7 +57,7 @@ class Election:
         return next((c for c in self.candidates if c.name == name), None)
     def get_all_candidates(self):
         for c in self.candidates:
-            print(Candidate.getCandidates(c))
+            print(Candidate.get_candidates(c))
 
 
     def vote(self, voter, candidate):
