@@ -21,8 +21,8 @@ class Election:
         return next((v for v in self.voters if v.name == name), False)
 
 
-    def isVoter(self, name: str, nr: int):
-        return any (v.name == name and v.constituency_nr== nr for v in self.voters)
+    def is_voter(self, name: str, nr: int):
+        return any(v.name == name and v.constituency_nr== nr for v in self.voters)
 
 
     # EDITING CANDIDATE LIST
