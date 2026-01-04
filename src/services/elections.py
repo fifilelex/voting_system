@@ -18,7 +18,7 @@ class Election:
 
 
     def get_voter(self, name: str, nr: int):
-        return next((v for v in self.voters if v.name == name), False)
+        return next((v for v in self.voters if v.name == name), None)
 
 
     def is_voter(self, name: str, nr: int):
