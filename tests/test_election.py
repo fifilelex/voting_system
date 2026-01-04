@@ -15,7 +15,7 @@ def test_add_voter(election_with_data):
     name = 'Adrian Zandberg'
     nr = 2
     e.add_voter(name, nr)
-    assert e.isVoter(name, nr)
+    assert e.is_voter(name, nr)
 
 
 def test_add_candidate_duplicate(election_with_data):
@@ -27,8 +27,8 @@ def test_add_candidate_duplicate(election_with_data):
 
 def test_is_voter(election_with_data):
     e = election_with_data
-    assert e.isVoter("Maciej Orluk", 1) is False
-    assert e.isVoter("Adenoid Hynkiel", 1) is True
+    assert e.is_voter("Maciej Orluk", 1) is False
+    assert e.is_voter("Adenoid Hynkiel", 1) is True
 
 #TEST EDITING CANDIDATE'S LIST
 def test_add_single_candidate(election_with_data):

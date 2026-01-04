@@ -10,19 +10,19 @@ class MENURESULTS(Enum):
 
 def call_submenu_handler(io, election):
     try:
-        choice = int(io.getInput())
+        choice = int(io.get_input())
     except ValueError:
         return "Invalid value."
     if choice == 1:
-        name = io.getCandidateName_add()
+        name = io.get_candidate_name_add()
         election.add_candidate(name)
         return MENURESULTS.CONTINUE
     elif choice == 2:
-        current_name, new_name = io.getCandidateName_edit()
+        current_name, new_name = io.get_candidate_name_edit()
         election.edit_candidate(current_name, new_name)
         return MENURESULTS.CONTINUE
     elif choice == 3: #delete candidate
-        deletion_name = io.getCandidateName_remove()
+        deletion_name = io.get_candidate_name_remove()
         election.delete_candidate(deletion_name)
         return MENURESULTS.CONTINUE
     elif choice ==  4: #get list of all candidates
@@ -35,7 +35,7 @@ def call_submenu_handler(io, election):
         return MENURESULTS.BACK
 def call_menu_handler(io, election):
         try:
-            choice = int(io.getInput())
+            choice = int(io.get_input())
         except ValueError:
             return "Invalid value."
         if choice ==  0: #get list of all candidates
@@ -44,7 +44,7 @@ def call_menu_handler(io, election):
         elif choice == 1: #show menu for candidates management
                 return MENURESULTS.NEXT
         elif choice == 2: #vote for x
-            voter_name, candid_name = io.getVotingData()
+            voter_name, candid_name = io.get_voting_data()
             c = election.get_candidate(candid_name)
             v = election.get_voter(voter_name)
             try:
