@@ -57,7 +57,7 @@ def call_menu_handler(io, election):
                 election.results()
                 return MENURESULTS.CONTINUE
         elif choice == 4: #close app
-                election.close()
+                io.close(election)
                 return MENURESULTS.EXIT
         else: #wrong choice
             io.error()
