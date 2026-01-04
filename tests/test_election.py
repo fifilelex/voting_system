@@ -110,5 +110,5 @@ def test_vote_nonexistent_candid(election_with_data):
     c = e.get_candidate(name = "w")
     v = e.get_voter(name = "Adenoid Hynkiel", nr=1)
     with pytest.raises(ValueError, match="not found"):
-        e.vote(c, v)
+        e.vote(v, c)
 
