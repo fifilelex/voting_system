@@ -33,13 +33,14 @@ def call_submenu_handler(io, election):
     else:
         io.error()
         return MENURESULTS.BACK
-def call_menu_handler(io, election):
+def call_menu_handler(io, election, data):
         try:
             choice = int(io.get_input())
         except ValueError:
             return "Invalid value."
         if choice ==  0: #get list of all candidates
-                election.get_all_candidates()
+                candids = election.get_all_candidates()
+                io.print_all_candidates(candids)
                 return MENURESULTS.CONTINUE
         elif choice == 1: #show menu for candidates management
                 return MENURESULTS.NEXT
@@ -57,7 +58,8 @@ def call_menu_handler(io, election):
                 election.results()
                 return MENURESULTS.CONTINUE
         elif choice == 4: #close app
-                io.close(election)
+                cand, voters = io.save_data(election)
+                data.json_dump_election_data(election, cand, voters)
                 return MENURESULTS.EXIT
         else: #wrong choice
             io.error()
