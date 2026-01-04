@@ -2,6 +2,7 @@ from src.io.io_manager import IOManager
 from src.io.MenuManager import *
 from src.io.menu import call_menu, call_submenu
 from src.services.elections import Election
+from src.persistence.json_repository import JsonData
 from tests.test import sample_test_data
 
 
