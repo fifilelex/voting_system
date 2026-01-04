@@ -82,26 +82,10 @@ class Election:
         results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
         winner = self.find_winner()
 
-        if winner:
-            print("\nElection winner(s):")
-            for w in winner:
-                print(f"{w.name} with {w.votes} votes")
-        with open(f"data/{self.name}_results.json", 'w', encoding='utf-8' ) as f:
-            json.dump({
-                "Election": self.name,
-                "Candidates": results_data,
-                "Winners": [c.to_dict() for c in winner]
-            }, f, indent=4, ensure_ascii=False)
 
-        for c in self.candidates:
-            print(c)
 
-        return winner
-    def close(self): #should be moved to io
-        with open(f"data/{self.name}_candidates.json", 'w', encoding='utf-8') as ca:
-            cand = [c.to_dict() for c in self.candidates]
-            json.dump(cand, ca, indent=4, ensure_ascii=False)
-        with open(f"data/{self.name}_voters.json", 'w', encoding='utf-8') as vo:
-            voters = [v.to_dict() for v in self.voters]
-            json.dump(voters, vo, indent=4, ensure_ascii=False)
+        return results_data, winner
+
+
+
 
