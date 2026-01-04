@@ -12,7 +12,7 @@ class Election:
     #EDITING VOTER LIST
 
     def add_voter(self, name: str, nr: int):
-        if self.isVoter(name, nr):
+        if self.is_voter(name, nr):
             raise ValueError(f"Voter {name} already exists!")
         self.voters.append(Voter(name, nr))
 
