@@ -1,3 +1,4 @@
+import json
 class IOManager:
     def get_candidate_name_add(self):
         return input('Type name of candidate that you want to add')
@@ -50,5 +51,7 @@ class IOManager:
 
     def success(self, msg):
         return print(f"{msg}")
+
+
     def error(self, msg):
         return print(msg)

@@ -78,6 +78,8 @@ class Election:
             raise ValueError("Candidates list is empty!")
         max_votes = max(c.votes for c in self.candidates)
         return [c for c in self.candidates if c.votes == max_votes]
+
+
     def results(self): #should be moved to io
         results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
         winner = self.find_winner()
