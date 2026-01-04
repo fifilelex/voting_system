@@ -54,6 +54,7 @@ def call_menu_handler(io, election, data):
                 io.error(str(e))
             else:
                 io.success("Vote casted successfully!")
+            return MENURESULTS.CONTINUE
         elif choice == 3: #get election result
                 election.results()
                 return MENURESULTS.CONTINUE
