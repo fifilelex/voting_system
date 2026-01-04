@@ -10,12 +10,13 @@ from tests.test import sample_test_data
 def main():
     election = Election("wybory prezydenckie", 2045)
     io = IOManager()
+    data = JsonData()
     sample_test_data(election)
     running = True
     subrunning = False
     while running:
         call_menu()
-        action = call_menu_handler(io, election)
+        action = call_menu_handler(io, election, data)
         if action == MENURESULTS.CONTINUE:
             pass
         elif action == MENURESULTS.BACK:
