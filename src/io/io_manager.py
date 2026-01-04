@@ -22,7 +22,9 @@ class IOManager:
 
     def get_input(self):
         return input()
-
+    def print_all_candidates(self, candidates):
+        for c in candidates:
+            print(c)
 
     def print_results(self, election, results_data, winner):
         if winner:
