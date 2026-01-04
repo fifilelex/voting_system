@@ -74,7 +74,7 @@ class Election:
 
     #ELECTION RELATED
     def find_winner(self):
-        if self.candidates is None:
+        if not self.candidates:
             raise ValueError("Candidates list is empty!")
         max_votes = max(c.votes for c in self.candidates)
         return [c for c in self.candidates if c.votes == max_votes]
