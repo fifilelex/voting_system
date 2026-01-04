@@ -17,11 +17,11 @@ class Election:
         self.voters.append(Voter(name, nr))
 
 
-    def get_voter(self, name: str, nr: int):
-        return next((v for v in self.voters if v.name == name), None)
+    def get_voter(self, name: str, nr: int)-> Voter:
+        return next((v for v in self.voters if v.name == name and v.constituency_nr == nr), None)
 
 
-    def is_voter(self, name: str, nr: int):
+    def is_voter(self, name: str, nr: int)-> bool:
         return any(v.name == name and v.constituency_nr== nr for v in self.voters)
 
 
@@ -53,11 +53,10 @@ class Election:
         return any(c.name == name for c in self.candidates)
 
 
-    def get_candidate(self, name: str):
+    def get_candidate(self, name: str) -> Candidate:
         return next((c for c in self.candidates if c.name == name), None)
-    def get_all_candidates(self):
-        for c in self.candidates:
-            print(Candidate.get_candidates(c))
+    def get_all_candidates(self) -> list:
+        return [c.name for c in self.candidates]
 
 
     def vote(self, voter, candidate):
@@ -73,14 +72,14 @@ class Election:
 
 
     #ELECTION RELATED
-    def find_winner(self):
+    def find_winner(self)-> list:
         if not self.candidates:
             raise ValueError("Candidates list is empty!")
         max_votes = max(c.votes for c in self.candidates)
         return [c for c in self.candidates if c.votes == max_votes]
 
 
-    def results(self): #should be moved to io
+    def results(self):
         results_data = [c.to_dict() for c in self.candidates] #makes candidates data a dictionary
         winner = self.find_winner()
 
